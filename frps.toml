@@ -1,10 +1,16 @@
+# ============================================
+# frps 服务端配置 - 适配宝塔面板环境
+# ============================================
+
 bindAddr = "0.0.0.0"
 bindPort = 7000
 #kcpBindPort = 7000
 quicBindPort = 7000
 
-vhostHTTPPort = 80
-vhostHTTPSPort = 443
+# HTTP/HTTPS 虚拟主机端口（避开宝塔 80/443）
+# 如需 HTTP 穿透可用此端口，或通过宝塔 Nginx 反向代理
+vhostHTTPPort = 8080
+vhostHTTPSPort = 8443
 
 transport.maxPoolCount = 2000
 transport.tcpMux = true
@@ -12,10 +18,11 @@ transport.tcpMuxKeepaliveInterval = 60
 transport.tcpKeepalive = 7200
 transport.tls.force = false
 
+# Web 管理面板配置
 webServer.addr = "0.0.0.0"
 webServer.port = 7500
 webServer.user = "admin"
-webServer.password = "admin"
+webServer.password = "xxx123456"
 webServer.pprofEnable = false
 
 log.to = "./frps.log"
@@ -23,9 +30,11 @@ log.level = "info"
 log.maxDays = 3
 log.disablePrintColor = false
 
+# 认证配置 - 请务必修改为你自己的复杂密钥！
 auth.method = "token"
-auth.token = "12345678"
+auth.token = "chenmingyu@2024"
 
+# 允许客户端使用的端口范围
 allowPorts = [
   { start = 10001, end = 50000 }
 ]

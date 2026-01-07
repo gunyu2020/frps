@@ -1,0 +1,64 @@
+# ============================================
+# frpc 客户端配置 - 本机内网穿透
+# ============================================
+
+# 服务端连接配置（修改为你的宝塔服务器公网IP）
+serverAddr = "你的服务器公网IP"
+serverPort = 7000
+
+# 认证密钥（必须与服务端 frps.toml 中的 auth.token 一致）
+auth.token = "YourSecureToken@2024"
+
+# 日志配置
+log.to = "./frpc.log"
+log.level = "info"
+log.maxDays = 3
+
+# ============================================
+# 穿透代理配置示例（根据需要启用）
+# ============================================
+
+# 示例1：穿透本机 Web 服务（如本地开发的网站）
+# 访问方式：http://服务器IP:10080
+[[proxies]]
+name = "local-web"
+type = "tcp"
+localIP = "127.0.0.1"
+localPort = 80
+remotePort = 10080
+
+# 示例2：穿透 Windows 远程桌面 (RDP)
+# 访问方式：服务器IP:13389
+# [[proxies]]
+# name = "windows-rdp"
+# type = "tcp"
+# localIP = "127.0.0.1"
+# localPort = 3389
+# remotePort = 13389
+
+# 示例3：穿透 SSH 服务
+# 访问方式：ssh -p 10022 user@服务器IP
+# [[proxies]]
+# name = "ssh"
+# type = "tcp"
+# localIP = "127.0.0.1"
+# localPort = 22
+# remotePort = 10022
+
+# 示例4：穿透本地 MySQL 数据库
+# 访问方式：服务器IP:13306
+# [[proxies]]
+# name = "mysql"
+# type = "tcp"
+# localIP = "127.0.0.1"
+# localPort = 3306
+# remotePort = 13306
+
+# 示例5：穿透本地其他服务（如 Node.js 开发服务器 3000 端口）
+# [[proxies]]
+# name = "nodejs-dev"
+# type = "tcp"
+# localIP = "127.0.0.1"
+# localPort = 3000
+# remotePort = 13000
+
